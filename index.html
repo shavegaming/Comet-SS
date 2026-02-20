@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Comet SS | Reach for the Stars</title>
+    <title>Comet SS</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
@@ -18,7 +18,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-family: 'Inter', sans-serif;
         }
 
         body {
@@ -34,8 +34,7 @@
             justify-content: space-between;
             align-items: center;
             padding: 20px 10%;
-            background: rgba(15, 18, 26, 0.8);
-            backdrop-filter: blur(10px);
+            background: rgba(15, 18, 26, 0.9);
             position: sticky;
             top: 0;
             z-index: 1000;
@@ -44,8 +43,10 @@
         .logo {
             font-size: 1.5rem;
             font-weight: 800;
-            color: var(--accent-blue);
+            color: var(--text-main);
         }
+
+        .logo span { color: var(--accent-blue); }
 
         .nav-links a {
             color: var(--text-dim);
@@ -55,114 +56,69 @@
             transition: 0.3s;
         }
 
-        .nav-links a:hover {
-            color: var(--accent-blue);
-        }
-
-        .login-btn {
-            background: var(--accent-blue);
-            color: white !important;
-            padding: 8px 20px;
-            border-radius: 5px;
-        }
+        .nav-links a:hover { color: var(--accent-blue); }
 
         /* Hero Section */
         .hero {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 100px 10%;
-            min-height: 80vh;
+            padding: 80px 10%;
+            min-height: 70vh;
+            gap: 50px;
         }
 
-        .hero-text {
+        .hero-image {
             flex: 1;
-            max-width: 500px;
+            max-width: 600px;
         }
 
-        .hero-text h1 {
+        .hero-image img {
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border: 1px solid #333;
+        }
+
+        .hero-content {
+            flex: 1;
+        }
+
+        .hero-content h1 {
             font-size: 3.5rem;
-            line-height: 1.1;
             margin-bottom: 20px;
         }
 
-        .hero-text h1 span {
-            color: var(--accent-blue);
-        }
+        .hero-content h1 span { color: var(--accent-blue); }
 
-        .hero-text p {
+        .hero-content p {
             color: var(--text-dim);
             font-size: 1.1rem;
             margin-bottom: 30px;
         }
 
-        /* Executor Preview Window */
-        .executor-window {
-            flex: 1;
-            background: #000;
-            border-radius: 10px;
-            border: 1px solid #333;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-            max-width: 600px;
-            overflow: hidden;
-            transform: perspective(1000px) rotateY(-10deg);
-        }
-
-        .window-header {
-            background: #1a1a1a;
-            padding: 10px 15px;
-            font-size: 0.8rem;
-            color: #888;
-            border-bottom: 1px solid #333;
-        }
-
-        .window-body {
-            height: 300px;
-            padding: 20px;
-            font-family: 'Courier New', Courier, monospace;
-            color: #00ff00;
-        }
-
-        .window-footer {
-            background: #1a1a1a;
-            padding: 10px;
-            display: flex;
-            gap: 10px;
-        }
-
-        .exec-btn {
-            background: #333;
-            color: white;
-            border: none;
-            padding: 5px 15px;
-            border-radius: 3px;
-            font-size: 0.7rem;
-            cursor: pointer;
+        .gif-banner {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 8px;
+            margin-top: 20px;
         }
 
         /* Features Section */
         .features {
             background: #ffffff;
             color: #000;
-            padding: 80px 10%;
+            padding: 60px 10%;
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 40px;
+            gap: 30px;
+            text-align: center;
         }
 
-        .feature-item h3 {
-            margin: 15px 0;
-            font-size: 1.2rem;
-        }
-
-        .feature-item p {
-            color: #666;
-            font-size: 0.9rem;
-        }
-
-        .feature-icon {
+        .feature-item i {
+            font-size: 2rem;
             color: var(--accent-blue);
-            font-size: 1.5rem;
+            margin-bottom: 15px;
         }
 
         /* Pricing Section */
@@ -171,77 +127,59 @@
             text-align: center;
         }
 
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-top: 50px;
+        .pricing-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 40px;
         }
 
         .price-card {
             background: var(--bg-card);
-            padding: 40px 30px;
-            border-radius: 10px;
-            text-align: left;
+            padding: 50px;
+            border-radius: 15px;
+            width: 100%;
+            max-width: 400px;
+            border: 1px solid #2d3748;
             transition: 0.3s;
-            border: 1px solid transparent;
         }
 
         .price-card:hover {
             border-color: var(--accent-blue);
-            transform: translateY(-10px);
+            transform: translateY(-5px);
         }
 
-        .price-card.popular {
-            background: #1e2533;
-            border: 1px solid #3b82f6;
-        }
-
-        .price-card h2 {
-            font-size: 2rem;
-            margin: 10px 0;
-        }
-
-        .price-card ul {
-            list-style: none;
-            margin: 30px 0;
-        }
-
-        .price-card li {
-            margin-bottom: 12px;
-            color: var(--text-dim);
-            font-size: 0.9rem;
-        }
-
-        .price-card li i {
-            color: var(--accent-blue);
-            margin-right: 10px;
-        }
+        .price-card h2 { font-size: 2.5rem; margin: 15px 0; }
+        .price-card ul { list-style: none; margin: 25px 0; text-align: left; }
+        .price-card li { margin-bottom: 10px; color: var(--text-dim); }
+        .price-card li i { color: var(--accent-blue); margin-right: 10px; }
 
         .buy-btn {
             display: block;
-            text-align: center;
             background: var(--accent-blue);
             color: white;
             text-decoration: none;
-            padding: 12px;
-            border-radius: 5px;
-            font-weight: 600;
+            padding: 15px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .notice {
+            margin-top: 20px;
+            color: #ffcc00;
+            font-size: 0.9rem;
         }
 
         footer {
-            padding: 50px 10%;
+            padding: 40px 10%;
             border-top: 1px solid #222;
             color: var(--text-dim);
+            text-align: center;
             font-size: 0.8rem;
-            display: flex;
-            justify-content: space-between;
         }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero { flex-direction: column; text-align: center; }
-            .executor-window { transform: none; margin-top: 50px; }
+        @media (max-width: 900px) {
+            .hero { flex-direction: column-reverse; text-align: center; }
             .features { grid-template-columns: 1fr; }
         }
     </style>
@@ -249,100 +187,66 @@
 <body>
 
     <nav>
-        <div class="logo">comet.ss</div>
+        <div class="logo">Comet<span>SS</span></div>
         <div class="nav-links">
             <a href="#">Home</a>
             <a href="#pricing">Pricing</a>
-            <a href="https://discord.gg/ZNDwmDPzUy">Discord</a>
-            <a href="#" class="login-btn">Login</a>
+            <a href="https://discord.gg/ZNDwmDPzUy" target="_blank">Discord</a>
         </div>
     </nav>
 
     <section class="hero">
-        <div class="hero-text">
-            <h1>Ready to start <span>the fun?</span></h1>
-            <p>With Comet SS, you gain access to the most powerful server-side scripts across high player count games. Seamlessly execute and dominate.</p>
-            <img src="https://cdn.discordapp.com/attachments/1451330046651531327/1472759399125880944/IMG_0759.gif?ex=69990393&is=6997b213&hm=b083e991db1b3369081dcba1f5a71488e68f60a1bc7ba36199e05a6ad970bdc3&" alt="Comet Banner" style="width:100%; border-radius:10px; margin-top:10px;">
+        <div class="hero-image">
+            <img src="https://cdn.discordapp.com/attachments/1445259865097240730/1474235617222201405/IMG_0823.png?ex=69991c69&is=6997cae9&hm=57e944542173d19e555249445cf983f443d371cf057b980a97bd1464efb39fc7&" alt="Comet SS UI">
         </div>
-
-        <div class="executor-window">
-            <div class="window-header">Comet SS | Executor</div>
-            <div class="window-body">
-                <span style="color: #abb2bf;">-- Loading Comet SS...</span><br>
-                <span style="color: #c678dd;">print</span>(<span style="color: #98c379;">"Welcome to the Stars"</span>)
-            </div>
-            <div class="window-footer">
-                <button class="exec-btn">Execute</button>
-                <button class="exec-btn">Clear</button>
-            </div>
+        <div class="hero-content">
+            <h1>Ready to start <span>the fun?</span></h1>
+            <p>Comet SS provides high-quality server-side execution for the best games. Join our community and dominate today.</p>
+            <img class="gif-banner" src="https://cdn.discordapp.com/attachments/1451330046651531327/1472759399125880944/IMG_0759.gif?ex=69990393&is=6997b213&hm=b083e991db1b3369081dcba1f5a71488e68f60a1bc7ba36199e05a6ad970bdc3&" alt="Promotional GIF">
         </div>
     </section>
 
     <section class="features">
         <div class="feature-item">
-            <div class="feature-icon"><i class="fas fa-bolt"></i></div>
+            <i class="fas fa-bolt"></i>
             <h3>Blazing Fast</h3>
-            <p>When you execute your script, it is handled through our secure and blazing fast servers instantly.</p>
+            <p>Instant script execution through our optimized server backend.</p>
         </div>
         <div class="feature-item">
-            <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
+            <i class="fas fa-shield-alt"></i>
             <h3>Secure</h3>
-            <p>Our backend is encrypted. You will never experience unexpected downtime or data leaks.</p>
+            <p>Our systems are built to stay undetected and stable 24/7.</p>
         </div>
         <div class="feature-item">
-            <div class="feature-icon"><i class="fas fa-th-large"></i></div>
+            <i class="fas fa-magic"></i>
             <h3>Customizable</h3>
-            <p>Comet SS features a modular UI that lets you customize your experience exactly how you like it.</p>
+            <p>A clean, sleek UI designed for ease of use and maximum control.</p>
         </div>
     </section>
 
-    <section class="pricing" id="pricing">
-        <h1>Our Pricing</h1>
-        <p style="color: var(--text-dim)">Choose your tier and start your journey with Comet SS.</p>
+    <section id="pricing" class="pricing">
+        <h1>Pricing</h1>
+        <p style="color: var(--text-dim);">More options coming soon!</p>
         
-        <div class="pricing-grid">
+        <div class="pricing-container">
             <div class="price-card">
-                <p>Normal</p>
-                <h2>$5 <span style="font-size: 1rem; color: #666;">USD</span></h2>
-                <p style="font-size: 0.8rem; color: #888;">Standard Whitelist</p>
+                <p style="text-transform: uppercase; letter-spacing: 1px; color: var(--accent-blue);">Current Plan</p>
+                <h2>15 <span style="font-size: 1.2rem; color: var(--text-dim);">Robux</span></h2>
                 <ul>
-                    <li><i class="fas fa-check-circle"></i> Access to all games</li>
-                    <li><i class="fas fa-check-circle"></i> Large Script Library</li>
-                    <li><i class="fas fa-check-circle"></i> Discord Community Access</li>
-                    <li><i class="fas fa-check-circle"></i> 24/7 Support</li>
+                    <li><i class="fas fa-check"></i> Full Premium Whitelist</li>
+                    <li><i class="fas fa-check"></i> Access to all supported games</li>
+                    <li><i class="fas fa-check"></i> Custom Script Library</li>
+                    <li><i class="fas fa-check"></i> Discord Buyer Role</li>
                 </ul>
-                <a href="https://www.roblox.com/game-pass/253551038/Snowmobile" class="buy-btn">Purchase</a>
-            </div>
-
-            <div class="price-card popular">
-                <p>Premium | Popular</p>
-                <h2>$10 <span style="font-size: 1rem; color: #666;">USD</span></h2>
-                <p style="font-size: 0.8rem; color: #888;">Enhanced Permissions</p>
-                <ul>
-                    <li><i class="fas fa-check-circle"></i> Everything in Normal</li>
-                    <li><i class="fas fa-check-circle"></i> Priority Game Access</li>
-                    <li><i class="fas fa-check-circle"></i> Custom UI Themes</li>
-                    <li><i class="fas fa-check-circle"></i> Early Access Features</li>
-                </ul>
-                <a href="https://www.roblox.com/game-pass/253551038/Snowmobile" class="buy-btn">Purchase</a>
+                <a href="https://www.roblox.com/game-pass/253551038/Snowmobile" target="_blank" class="buy-btn">Purchase Now</a>
+                <p class="notice"><strong>IMPORTANT:</strong> After buying, open a ticket in our Discord with proof to get whitelisted.</p>
             </div>
         </div>
-
-        <p style="margin-top: 40px; color: var(--accent-blue); font-weight: bold;">
-            Note: After purchasing, open a ticket in our Discord with proof of purchase to be whitelisted.
-        </p>
     </section>
 
     <footer>
-        <div>
-            <p>&copy; 2026 Comet SS. All Rights Reserved.</p>
-            <p>Not affiliated with Roblox Corporation.</p>
-        </div>
-        <div class="nav-links">
-            <a href="https://discord.gg/ZNDwmDPzUy">Discord</a>
-            <a href="#">Terms</a>
-            <a href="#">Privacy</a>
-        </div>
+        <p>&copy; 2026 Comet SS | All Rights Reserved.</p>
+        <p style="margin-top: 5px; opacity: 0.5;">Not associated with Roblox Corp.</p>
     </footer>
 
 </body>
