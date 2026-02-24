@@ -14,6 +14,7 @@
             --text-dim: #94a3b8;
             --glass-border: rgba(255, 255, 255, 0.08);
             --liquid-glass: rgba(255, 255, 255, 0.03);
+            --success: #10b981;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
@@ -69,27 +70,68 @@
         .faq-item h4 { color: var(--accent-blue); margin-bottom: 10px; }
         .faq-item p { color: var(--text-dim); font-size: 0.95rem; }
 
-        /* Pricing Box */
+        /* New Pricing Grid */
+        .pricing-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            padding: 20px 0;
+        }
         .pricing { padding: 100px 10%; text-align: center; }
         .price-card {
             background: linear-gradient(145deg, #0f1219, #080a0e);
-            border: 1px solid var(--accent-blue); padding: 60px; border-radius: 30px;
-            display: inline-block; width: 100%; max-width: 550px;
-            box-shadow: 0 0 50px rgba(59, 130, 246, 0.15);
+            border: 1px solid var(--glass-border); 
+            padding: 40px 30px; 
+            border-radius: 25px;
+            transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
-        .price-val { font-size: 4.5rem; font-weight: 900; margin: 15px 0; }
+        .price-card:hover {
+            border-color: var(--accent-blue);
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.1);
+        }
+        .price-card.featured {
+            border: 1px solid var(--accent-blue);
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.15);
+        }
+        .price-val { font-size: 2.5rem; font-weight: 900; margin: 15px 0; }
+        .price-val span { font-size: 1rem; color: var(--text-dim); }
+
+        .feature-list { text-align: left; list-style: none; margin: 25px 0; color: var(--text-dim); font-size: 0.9rem; flex-grow: 1; }
+        .feature-list li { margin-bottom: 12px; display: flex; align-items: center; }
+        .feature-list i { color: var(--success); margin-right: 10px; }
+
+        .btn-group { display: flex; flex-direction: column; gap: 10px; }
         .buy-btn {
             display: block; background: var(--accent-blue); color: white;
-            text-decoration: none; padding: 22px; border-radius: 15px;
-            font-weight: 800; font-size: 1.4rem; transition: 0.3s;
+            text-decoration: none; padding: 14px; border-radius: 12px;
+            font-weight: 700; font-size: 1rem; transition: 0.3s;
         }
-        .buy-btn:hover { background: #2563eb; transform: translateY(-3px); }
-        .discord-warning { 
-            margin-top: 30px; background: rgba(255, 193, 7, 0.1); 
-            color: #ffc107; padding: 20px; border-radius: 15px; 
-            border: 1px solid rgba(255, 193, 7, 0.2); font-size: 0.9rem;
+        .buy-btn.paypal {
+            background: #ffffff;
+            color: #111;
+        }
+        .buy-btn:hover { opacity: 0.9; transform: scale(1.02); }
+
+        /* Verification Box */
+        .instruction-box {
+            margin-top: 50px;
+            background: var(--liquid-glass);
+            border: 1px solid var(--accent-blue);
+            padding: 40px;
+            border-radius: 20px;
             text-align: left;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
         }
+        .instruction-box h3 { margin-bottom: 20px; color: var(--accent-blue); display: flex; align-items: center; gap: 10px;}
+        .instruction-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+        .step { background: rgba(255,255,255,0.03); padding: 15px; border-radius: 10px; border: 1px solid var(--glass-border); }
+        .step-num { color: var(--accent-blue); font-weight: 900; margin-right: 5px; }
 
         footer { padding: 60px 10%; text-align: center; border-top: 1px solid var(--glass-border); color: var(--text-dim); }
 
@@ -168,7 +210,7 @@
         </div>
         <div class="faq-item">
             <h4>How do I get whitelisted?</h4>
-            <p>Purchase the gamepass below, join our Discord, and open a ticket with a screenshot of your purchase. Our staff will whitelist you ASAP.</p>
+            <p>Purchase a plan below, join our Discord, and open a ticket with proof. Our staff will whitelist you ASAP.</p>
         </div>
         <div class="faq-item">
             <h4>Is it undetected?</h4>
@@ -177,31 +219,99 @@
     </section>
 
     <section id="pricing" class="pricing">
-        <div class="price-card">
-            <p style="text-transform: uppercase; letter-spacing: 2px; font-weight: bold; color: var(--accent-blue);">Lifetime Premium</p>
-            <div class="price-val">15 <span style="font-size: 1.5rem; color: var(--text-dim);">Robux</span></div>
-            
-            <ul style="text-align: left; list-style: none; margin: 30px 0; color: var(--text-dim);">
-                <li style="margin-bottom: 10px;"><i class="fas fa-check" style="color: #10b981; margin-right: 10px;"></i> 14k+ Script Library</li>
-                <li style="margin-bottom: 10px;"><i class="fas fa-check" style="color: #10b981; margin-right: 10px;"></i> Advanced Byfron Bypass</li>
-                <li style="margin-bottom: 10px;"><i class="fas fa-check" style="color: #10b981; margin-right: 10px;"></i> Sexy Liquid Glass UI</li>
-                <li style="margin-bottom: 10px;"><i class="fas fa-check" style="color: #10b981; margin-right: 10px;"></i> Settings & Game Info Tabs</li>
-            </ul>
-
-            <a href="https://www.roblox.com/game-pass/253551038/Snowmobile" target="_blank" class="buy-btn">Purchase Now</a>
-            
-            <div class="discord-warning">
-                <strong><i class="fas fa-ticket-alt"></i> WHITELIST STEPS:</strong><br>
-                1. Buy the gamepass above.<br>
-                2. Join our <a href="https://discord.gg/ZNDwmDPzUy" style="color: #ffc107;">Discord Server</a>.<br>
-                3. Create a ticket with proof of purchase.
+        <h2 class="section-title">Pricing & Plans</h2>
+        
+        <div class="pricing-container">
+            <div class="price-card">
+                <div>
+                    <p style="text-transform: uppercase; letter-spacing: 2px; font-weight: bold; color: var(--text-dim);">Free</p>
+                    <div class="price-val">$0 <span>/ Free</span></div>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check"></i> Basic Script Access</li>
+                        <li><i class="fas fa-check"></i> Community Support</li>
+                        <li><i class="fas fa-times" style="color: #ef4444;"></i> No Priority Whitelist</li>
+                    </ul>
+                </div>
+                <div class="btn-group">
+                    <a href="https://discord.gg/ZNDwmDPzUy" target="_blank" class="buy-btn" style="background: #4b5563;">Get Started</a>
+                </div>
             </div>
+
+            <div class="price-card featured">
+                <div>
+                    <p style="text-transform: uppercase; letter-spacing: 2px; font-weight: bold; color: var(--accent-blue);">Standard</p>
+                    <div class="price-val">$5 <span>/ Lifetime</span></div>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check"></i> Full Script Library</li>
+                        <li><i class="fas fa-check"></i> Standard Whitelist</li>
+                        <li><i class="fas fa-check"></i> All Hub Features</li>
+                    </ul>
+                </div>
+                <div class="btn-group">
+                    <a href="https://www.roblox.com/game-pass/1724645841" target="_blank" class="buy-btn">Buy Gamepass</a>
+                    <a href="https://www.paypal.com/paypalme/shaveboyshave" target="_blank" class="buy-btn paypal"><i class="fab fa-paypal"></i> PayPal</a>
+                </div>
+            </div>
+
+            <div class="price-card">
+                <div>
+                    <p style="text-transform: uppercase; letter-spacing: 2px; font-weight: bold; color: #f59e0b;">Limited</p>
+                    <div class="price-val">$17 <span>/ Advanced</span></div>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check"></i> Advanced Access</li>
+                        <li><i class="fas fa-check"></i> Priority Support</li>
+                        <li><i class="fas fa-check"></i> Early Feature Access</li>
+                    </ul>
+                </div>
+                <div class="btn-group">
+                    <a href="https://www.roblox.com/game-pass/1727256672" target="_blank" class="buy-btn">Buy Gamepass</a>
+                    <a href="https://www.paypal.com/paypalme/shaveboyshave" target="_blank" class="buy-btn paypal"><i class="fab fa-paypal"></i> PayPal</a>
+                </div>
+            </div>
+
+            <div class="price-card">
+                <div>
+                    <p style="text-transform: uppercase; letter-spacing: 2px; font-weight: bold; color: #a855f7;">Comet+</p>
+                    <div class="price-val">$29.99 <span>/ Ultra</span></div>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-star"></i> Ultimate Access</li>
+                        <li><i class="fas fa-star"></i> Instant Whitelist</li>
+                        <li><i class="fas fa-star"></i> Custom Script Support</li>
+                    </ul>
+                </div>
+                <div class="btn-group">
+                    <a href="https://www.roblox.com/game-pass/1728612396" target="_blank" class="buy-btn">Buy Gamepass</a>
+                    <a href="https://www.paypal.com/paypalme/shaveboyshave" target="_blank" class="buy-btn paypal"><i class="fab fa-paypal"></i> PayPal</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="instruction-box">
+            <h3><i class="fas fa-shield-alt"></i> Verification Steps</h3>
+            <div class="instruction-grid">
+                <div class="step">
+                    <p><span class="step-num">1.</span> Purchase your desired plan using the buttons above.</p>
+                </div>
+                <div class="step">
+                    <p><span class="step-num">2.</span> Join our <a href="https://discord.gg/ZNDwmDPzUy" target="_blank" style="color:var(--accent-blue)">Discord Server</a>.</p>
+                </div>
+                <div class="step">
+                    <p><span class="step-num">3.</span> Create a ticket in the <b>#tickets</b> channel.</p>
+                </div>
+                <div class="step">
+                    <p><span class="step-num">4.</span> Provide Transaction ID (PayPal) or Ownership Screenshot (Roblox).</p>
+                </div>
+            </div>
+            <p style="margin-top: 20px; font-size: 0.85rem; color: var(--text-dim); text-align: center;">
+                Need help? Contact our support staff on Discord 24/7.
+            </p>
         </div>
     </section>
 
     <footer>
         <div class="logo">Comet <span>SS</span></div>
         <p style="margin-top: 15px; font-size: 0.85rem; opacity: 0.6;">&copy; 2026 Comet SS. Not affiliated with Roblox Corp.</p>
+        <p style="margin-top: 10px; font-weight: bold; color: #ef4444;">comet ss is still in development ⛔</p>
     </footer>
 
 </body>
