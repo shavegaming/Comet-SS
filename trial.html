@@ -6,89 +6,122 @@
     <title>Comet SS - Free Trial</title>
     <style>
         :root {
-            --bg-color: #0b0c11;
-            --card-bg: #14161f;
-            --input-bg: #1c1e29;
-            --text-primary: #ffffff;
-            --text-secondary: #a0a0a0;
-            --accent-purple: #7d5fff;
-            --accent-hover: #6a49f2;
-            --error-red: #ff4d4d;
+            --bg-dark: #050505;
+            --container-bg: #0d0e12;
+            --inner-card: #14151a;
+            --text-main: #ffffff;
+            --text-muted: #777777;
+            --price-red: #d9534f;
+            --accent-purple: #8d71ff;
+            --input-bg: #0a0b0e;
+            --border-color: #22242b;
         }
 
         body {
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-primary);
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
             margin: 0;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
             min-height: 100vh;
         }
 
-        .container {
-            width: 90%;
-            max-width: 800px;
-            background-color: var(--card-bg);
-            padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-
-        .product-grid {
-            display: grid;
-            grid-template-columns: 1fr 1.5fr;
-            gap: 40px;
-        }
-
-        /* Responsive Layout */
-        @media (max-width: 768px) {
-            .product-grid {
-                grid-template-columns: 1fr;
-            }
-            .container {
-                padding: 20px;
-                margin: 20px 0;
-            }
-        }
-
-        .image-section img {
+        /* Top Nav Simulation */
+        .top-nav {
             width: 100%;
-            border-radius: 4px;
-            border: 1px solid #2a2d3d;
+            padding: 15px 10%;
+            background: #0d0e12;
+            border-bottom: 1px solid #1a1c24;
+            display: flex;
+            gap: 20px;
+            font-size: 12px;
+            color: #aaa;
+            box-sizing: border-box;
         }
 
-        .info-section h1 {
-            font-size: 1.8rem;
-            margin-top: 0;
-            margin-bottom: 10px;
+        .breadcrumb {
+            width: 80%;
+            margin: 20px 0;
+            font-size: 11px;
+            color: var(--text-muted);
+            text-align: left;
+        }
+
+        .main-wrapper {
+            width: 80%;
+            max-width: 1100px;
+            background: var(--container-bg);
+            padding: 40px;
+            border-radius: 4px;
+            display: flex;
+            gap: 50px;
+        }
+
+        /* Left Side: Image */
+        .product-image-container {
+            flex: 0 0 300px;
+        }
+
+        .product-image-container img {
+            width: 100%;
+            border-radius: 2px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        }
+
+        .zoom-hint {
+            display: block;
+            text-align: center;
+            font-size: 10px;
+            color: #555;
+            margin-top: 10px;
+        }
+
+        /* Right Side: Details */
+        .product-details {
+            flex: 1;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin: 0 0 10px 0;
+            font-weight: 500;
         }
 
         .price {
-            color: var(--error-red);
-            font-size: 1.4rem;
+            color: var(--price-red);
+            font-size: 18px;
             font-weight: bold;
-            margin-bottom: 5px;
+            margin-bottom: 2px;
         }
 
-        .stock-status {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
+        .stock {
+            font-size: 12px;
+            color: var(--text-muted);
             margin-bottom: 20px;
         }
 
         .description {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            line-height: 1.5;
-            margin-bottom: 20px;
+            font-size: 13px;
+            color: #999;
+            line-height: 1.6;
+            margin-bottom: 25px;
         }
 
-        /* Form Styling */
-        .form-container {
-            background: rgba(0,0,0,0.2);
-            padding: 20px;
+        .description strong { color: #ccc; }
+
+        .system-req {
+            font-size: 12px;
+            margin-bottom: 30px;
+        }
+
+        .system-req span { color: var(--text-muted); display: block; margin-bottom: 5px;}
+
+        /* Form Area */
+        .purchase-card {
+            background: var(--inner-card);
+            padding: 30px;
             border-radius: 4px;
         }
 
@@ -98,93 +131,115 @@
 
         label {
             display: block;
-            font-size: 0.85rem;
+            font-size: 12px;
             margin-bottom: 8px;
-            color: var(--text-primary);
+            color: #eee;
         }
 
         label span {
-            color: var(--error-red);
-            font-size: 0.7rem;
+            color: var(--price-red);
+            font-size: 9px;
             text-transform: uppercase;
             margin-left: 5px;
         }
 
-        input[type="text"] {
+        input {
             width: 100%;
-            padding: 12px;
-            background-color: var(--input-bg);
-            border: 1px solid #2a2d3d;
-            border-radius: 4px;
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            padding: 10px;
             color: white;
+            border-radius: 3px;
             box-sizing: border-box;
-            outline: none;
         }
 
-        input[type="text"]:focus {
-            border-color: var(--accent-purple);
-        }
-
-        button {
-            background-color: var(--accent-purple);
+        .add-to-cart {
+            background: var(--accent-purple);
             color: white;
             border: none;
-            padding: 12px 24px;
+            padding: 10px 25px;
             border-radius: 20px;
+            font-size: 12px;
             font-weight: bold;
             cursor: pointer;
-            transition: background 0.2s;
+            margin-top: 10px;
         }
 
-        button:hover {
-            background-color: var(--accent-hover);
+        .share-btn {
+            display: block;
+            margin-top: 20px;
+            font-size: 11px;
+            color: #555;
+            text-decoration: none;
         }
 
-        .footer-note {
-            margin-top: 15px;
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            font-style: italic;
+        footer {
+            margin-top: 50px;
+            width: 80%;
+            border-top: 1px solid #1a1c24;
+            padding: 20px 0;
+            display: flex;
+            justify-content: space-between;
+            font-size: 10px;
+            color: #444;
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <div class="product-grid">
-        <div class="image-section">
-            <img src="https://via.placeholder.com/300/1c1e29/7d5fff?text=COMET+SS+FREE+TRIAL" alt="Comet SS Logo">
+    <div class="top-nav">
+        <span>☰ Purchase Failed? Click Here!</span>
+        <span style="color:white; border-bottom: 2px solid var(--accent-purple);">🛒 Store</span>
+        <span>💬 Support</span>
+    </div>
+
+    <div class="breadcrumb">
+        Home > Roblox > Comet SS Free Trial
+    </div>
+
+    <div class="main-wrapper">
+        <div class="product-image-container">
+            <img src="https://cdn.discordapp.com/attachments/1451330046651531327/1472759399125880944/IMG_0759.gif?ex=699f9b13&is=699e4993&hm=410cd1149d5e7b73ce2afc7dd1d9db2411059c9d9e44705fb4a8f2cc3fe7d65e&" alt="Comet SS">
+            <span class="zoom-hint">🔍 Click or hover over image to zoom in</span>
         </div>
 
-        <div class="info-section">
-            <h1>Apply for a Free Trial</h1>
+        <div class="product-details">
+            <h1>Comet SS Free Trial</h1>
             <div class="price">0.00 USD</div>
-            <div class="stock-status">Limited slots available</div>
-            
+            <div class="stock">Unlimited stock</div>
+
             <p class="description">
-                Experience the power of <strong>Comet SS</strong>. Our server-side executor provides a seamless environment for your scripts with high stability and a user-friendly interface.
+                Comet SS is a <strong>Roblox Server Side Executor</strong> which has a user friendly UI. Comet SS also has <strong>pre-made scripts for your favorite games</strong>, making it easy to get started with scripting. Apply for the free trial today and experience next level execution with no errors.
             </p>
 
-            <div class="form-container">
-                <form action="https://formspree.io/f/xzdaykzr" method="POST">
-                    
-                    <div class="form-group">
-                        <label>Roblox Username <span>Required</span></label>
-                        <input type="text" name="roblox_username" placeholder="Enter username" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Discord Username <span>Required</span></label>
-                        <input type="text" name="discord_username" placeholder="Username#0000" required>
-                    </div>
-
-                    <button type="submit">Submit Application</button>
-                </form>
-                <p class="footer-note">Your application has been submitted, we’ll review it and add you to the free trial soon!</p>
+            <div class="system-req">
+                <span>System Requirements</span>
+                Windows 10, 11, Mac OS, Mobile, All platforms compatible
             </div>
+
+            <div class="purchase-card">
+                <form action="#" method="POST">
+                    <div class="form-group">
+                        <label>Quantity <span>Required</span></label>
+                        <input type="number" value="1" disabled style="width: 60px; color: #555;">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Discord Username and Tag <span>Required</span></label>
+                        <input type="text" placeholder="Username#0000" required>
+                    </div>
+
+                    <button type="submit" class="add-to-cart">Claim Trial</button>
+                </form>
+            </div>
+            <a href="#" class="share-btn">🔗 Share</a>
         </div>
     </div>
-</div>
+
+    <footer>
+        <div>Refund Policy &nbsp; Terms of Service &nbsp; Privacy Policy &nbsp; Cookie Policy</div>
+        <div style="text-align: right;">Copyright © 2026 Comet SS<br></div>
+    </footer>
 
 </body>
 </html>
