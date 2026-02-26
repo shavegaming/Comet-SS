@@ -3,29 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Comet SS - Premium Roblox ServerSide executor. Safe, fast, customizable scripts with 24/7 support.">
+    <meta property="og:title" content="Comet SS - Ready to start the fun?">
+    <meta property="og:description" content="Premium ServerSide executor for Roblox with blazing fast servers, secure execution, and customizable UI.">
+    <meta property="og:type" content="website">
     <title>Comet SS - Ready to start the fun?</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>☄️</text></svg>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary-blue: #2563eb;
             --primary-hover: #1d4ed8;
-            --dark-bg: #0f172a; /* Deep Slate */
-            --card-dark: #1e293b; /* Lighter Slate */
+            --dark-bg: #0f172a;
+            --card-dark: #1e293b;
             --light-bg: #ffffff;
             --gray-bg: #f1f5f9;
             --text-main: #0f172a;
             --text-light: #64748b;
+            --text-muted: #94a3b8;
             --white: #ffffff;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+            --transition: all 0.2s ease;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
         
-        body { background-color: var(--light-bg); color: var(--text-main); line-height: 1.6; }
+        body { 
+            background-color: var(--light-bg); 
+            color: var(--text-main); 
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
 
         /* --- Navigation --- */
         nav {
-            background: var(--white);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
             border-bottom: 1px solid #e2e8f0;
             padding: 15px 5%;
             display: flex;
@@ -34,19 +50,72 @@
             position: sticky;
             top: 0;
             z-index: 1000;
+            transition: var(--transition);
         }
-        .logo { font-weight: 800; font-size: 1.5rem; color: var(--text-main); display: flex; align-items: center; gap: 8px; }
+        nav.scrolled {
+            padding: 12px 5%;
+            box-shadow: var(--shadow-sm);
+        }
+        .logo { 
+            font-weight: 800; 
+            font-size: 1.5rem; 
+            color: var(--text-main); 
+            display: flex; 
+            align-items: center; 
+            gap: 8px; 
+            text-decoration: none;
+        }
         .logo span { color: var(--primary-blue); }
         .nav-links { display: flex; gap: 30px; }
-        .nav-links a { text-decoration: none; color: var(--text-light); font-weight: 500; font-size: 0.95rem; transition: 0.3s; }
-        .nav-links a:hover { color: var(--primary-blue); }
-        .login-btn { background: var(--primary-blue); color: white; padding: 8px 20px; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: 0.3s; }
-        .login-btn:hover { background: var(--primary-hover); }
-        .mobile-menu { display: none; font-size: 1.5rem; cursor: pointer; }
+        .nav-links a { 
+            text-decoration: none; 
+            color: var(--text-light); 
+            font-weight: 500; 
+            font-size: 0.95rem; 
+            transition: var(--transition);
+            padding: 8px 4px;
+            border-radius: 4px;
+        }
+        .nav-links a:hover, 
+        .nav-links a.active { 
+            color: var(--primary-blue); 
+            background: rgba(37, 99, 235, 0.08);
+        }
+        .login-btn { 
+            background: var(--primary-blue); 
+            color: white; 
+            padding: 8px 20px; 
+            border-radius: 6px; 
+            text-decoration: none; 
+            font-weight: 600; 
+            font-size: 0.9rem; 
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+        .login-btn:hover { 
+            background: var(--primary-hover); 
+            transform: translateY(-1px);
+        }
+        .login-btn:focus {
+            outline: 2px solid var(--primary-blue);
+            outline-offset: 2px;
+        }
+        .mobile-menu { 
+            display: none; 
+            font-size: 1.5rem; 
+            cursor: pointer; 
+            color: var(--text-main);
+            padding: 8px;
+            border-radius: 6px;
+        }
+        .mobile-menu:hover {
+            background: var(--gray-bg);
+        }
 
         /* --- Hero Section --- */
         .hero {
-            background-color: var(--dark-bg);
+            background: linear-gradient(135deg, var(--dark-bg) 0%, #1e293b 100%);
             padding: 100px 10%;
             display: flex;
             align-items: center;
@@ -55,230 +124,637 @@
             min-height: 80vh;
         }
         .hero-content { flex: 1; color: white; }
-        .hero-content h1 { font-size: 3.5rem; line-height: 1.1; font-weight: 800; margin-bottom: 20px; }
+        .hero-content h1 { 
+            font-size: clamp(2.5rem, 5vw, 3.5rem); 
+            line-height: 1.1; 
+            font-weight: 800; 
+            margin-bottom: 20px; 
+        }
         .hero-content h1 span { color: var(--primary-blue); }
-        .hero-content p { color: #94a3b8; font-size: 1.1rem; max-width: 500px; margin-bottom: 30px; }
-        .hero-buttons { display: flex; gap: 15px; }
-        .btn { padding: 12px 24px; border-radius: 6px; text-decoration: none; font-weight: 600; transition: 0.3s; display: inline-block; }
-        .btn-primary { background: var(--primary-blue); color: white; }
-        .btn-primary:hover { background: var(--primary-hover); transform: translateY(-2px); }
-        .btn-secondary { background: transparent; border: 1px solid #334155; color: white; }
-        .btn-secondary:hover { border-color: white; }
+        .hero-content p { 
+            color: var(--text-muted); 
+            font-size: 1.1rem; 
+            max-width: 500px; 
+            margin-bottom: 30px; 
+            line-height: 1.7;
+        }
+        .hero-buttons { display: flex; gap: 15px; flex-wrap: wrap; }
+        .btn { 
+            padding: 12px 24px; 
+            border-radius: 6px; 
+            text-decoration: none; 
+            font-weight: 600; 
+            transition: var(--transition); 
+            display: inline-block;
+            border: 1px solid transparent;
+        }
+        .btn:focus {
+            outline: 2px solid var(--primary-blue);
+            outline-offset: 2px;
+        }
+        .btn-primary { 
+            background: var(--primary-blue); 
+            color: white; 
+        }
+        .btn-primary:hover { 
+            background: var(--primary-hover); 
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+        .btn-secondary { 
+            background: transparent; 
+            border: 1px solid #334155; 
+            color: white; 
+        }
+        .btn-secondary:hover { 
+            border-color: white; 
+            background: rgba(255,255,255,0.05);
+        }
 
-        .hero-image { flex: 1; display: flex; justify-content: flex-end; perspective: 1000px; }
+        .hero-image { 
+            flex: 1; 
+            display: flex; 
+            justify-content: flex-end; 
+            perspective: 1000px; 
+        }
         .hero-image img {
             width: 100%;
             max-width: 600px;
             border-radius: 12px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            box-shadow: var(--shadow-lg);
             border: 1px solid #334155;
-            transform: rotateY(-10deg) rotateX(5deg);
-            transition: 0.5s;
+            transform: rotateY(-8deg) rotateX(3deg);
+            transition: transform 0.4s ease;
+            will-change: transform;
         }
-        .hero-image img:hover { transform: rotateY(0) rotateX(0); }
+        .hero-image img:hover { 
+            transform: rotateY(0) rotateX(0); 
+        }
 
         /* --- Features Section --- */
-        .features { padding: 80px 10%; background: var(--white); text-align: center; }
-        .features h2 { font-size: 2rem; color: var(--text-main); margin-bottom: 10px; }
-        .features p { color: var(--text-light); margin-bottom: 50px; max-width: 600px; margin-left: auto; margin-right: auto; }
-        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; text-align: left; }
-        .feature-card { padding: 20px; }
-        .feature-icon { font-size: 2rem; margin-bottom: 20px; display: inline-block; }
-        .feature-card h3 { font-size: 1.2rem; margin-bottom: 10px; font-weight: 700; }
-        .feature-card p { font-size: 0.95rem; color: var(--text-light); margin: 0; text-align: left; }
+        .features { 
+            padding: 80px 10%; 
+            background: var(--white); 
+            text-align: center; 
+        }
+        .features h2 { 
+            font-size: clamp(1.8rem, 4vw, 2rem); 
+            color: var(--text-main); 
+            margin-bottom: 10px; 
+            font-weight: 800;
+        }
+        .features p { 
+            color: var(--text-light); 
+            margin-bottom: 50px; 
+            max-width: 600px; 
+            margin-left: auto; 
+            margin-right: auto; 
+            font-size: 1.05rem;
+        }
+        .features-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+            gap: 40px; 
+            text-align: left; 
+        }
+        .feature-card { 
+            padding: 24px; 
+            border-radius: 10px;
+            transition: var(--transition);
+            border: 1px solid transparent;
+        }
+        .feature-card:hover {
+            transform: translateY(-3px);
+            border-color: #e2e8f0;
+            box-shadow: var(--shadow-md);
+            background: var(--gray-bg);
+        }
+        .feature-icon { 
+            font-size: 2rem; 
+            margin-bottom: 20px; 
+            display: inline-block; 
+            width: 56px;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            background: rgba(37, 99, 235, 0.08);
+        }
+        .feature-card h3 { 
+            font-size: 1.25rem; 
+            margin-bottom: 12px; 
+            font-weight: 700; 
+            color: var(--text-main);
+        }
+        .feature-card p { 
+            font-size: 0.95rem; 
+            color: var(--text-light); 
+            margin: 0; 
+            line-height: 1.6;
+        }
         .icon-fast { color: #f59e0b; }
         .icon-secure { color: var(--primary-blue); }
         .icon-custom { color: #64748b; }
 
         /* --- Reviews Section --- */
-        .reviews { padding: 80px 10%; background: var(--dark-bg); text-align: center; }
-        .reviews h2 { color: var(--primary-blue); font-size: 2rem; margin-bottom: 50px; }
-        .review-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .reviews { 
+            padding: 80px 10%; 
+            background: var(--dark-bg); 
+            text-align: center; 
+        }
+        .reviews h2 { 
+            color: var(--primary-blue); 
+            font-size: clamp(1.8rem, 4vw, 2rem); 
+            margin-bottom: 50px; 
+            font-weight: 800;
+        }
+        .review-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+            gap: 20px; 
+        }
         .review-card {
             background: var(--primary-blue);
             color: white;
-            padding: 30px;
-            border-radius: 8px;
+            padding: 28px;
+            border-radius: 10px;
             text-align: left;
+            position: relative;
+            transition: var(--transition);
+        }
+        .review-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+        .review-card::before {
+            content: """;
+            position: absolute;
+            top: 12px;
+            left: 20px;
+            font-size: 4rem;
+            font-family: Georgia, serif;
+            opacity: 0.2;
+            line-height: 1;
+        }
+        .review-user { 
+            display: block; 
+            margin-top: 20px; 
+            font-weight: 700; 
+            font-style: normal; 
+            font-size: 0.95rem;
+            opacity: 0.95;
+            position: relative;
+            z-index: 1;
+        }
+        .review-text {
+            position: relative;
+            z-index: 1;
+            line-height: 1.6;
             font-style: italic;
         }
-        .review-user { display: block; margin-top: 15px; font-weight: 700; font-style: normal; font-size: 0.9rem; opacity: 0.9; }
+        .review-rating {
+            display: inline-block;
+            margin-top: 12px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            background: rgba(255,255,255,0.15);
+            padding: 4px 12px;
+            border-radius: 20px;
+        }
 
         /* --- Pricing Section --- */
-        .pricing { padding: 80px 10%; background: var(--white); }
-        .pricing-header { text-align: center; margin-bottom: 50px; }
-        .pricing-header h2 { color: var(--primary-blue); font-size: 2.5rem; margin-bottom: 10px; }
-        .pricing-header p { color: var(--text-light); }
+        .pricing { 
+            padding: 80px 10%; 
+            background: var(--white); 
+        }
+        .pricing-header { 
+            text-align: center; 
+            margin-bottom: 50px; 
+        }
+        .pricing-header h2 { 
+            color: var(--primary-blue); 
+            font-size: clamp(2rem, 4vw, 2.5rem); 
+            margin-bottom: 12px; 
+            font-weight: 800;
+        }
+        .pricing-header p { 
+            color: var(--text-light); 
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
         
-        .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; align-items: start; }
+        .pricing-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); 
+            gap: 24px; 
+            align-items: start; 
+        }
         
         .price-card {
-            padding: 30px;
-            border-radius: 8px;
+            padding: 32px 28px;
+            border-radius: 12px;
             border: 1px solid #e2e8f0;
             text-align: left;
-            transition: 0.3s;
+            transition: var(--transition);
+            position: relative;
+            background: var(--white);
         }
-        .price-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        .price-card:hover { 
+            transform: translateY(-4px); 
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary-blue);
+        }
         
-        /* Specific Card Styles to match screenshot */
+        /* Badge for popular plan */
+        .price-card.popular::before {
+            content: "Most Popular";
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary-blue);
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 4px 16px;
+            border-radius: 20px;
+            white-space: nowrap;
+            box-shadow: var(--shadow-md);
+        }
+        
+        /* Specific Card Styles */
         .card-free { background: var(--white); }
         .card-normal { background: var(--gray-bg); }
-        .card-limited { background: var(--card-dark); color: white; border: none; }
-        .card-limited h3, .card-limited .price, .card-limited li { color: white; }
-        .card-limited .check { color: var(--primary-blue); filter: brightness(1.5); }
+        .card-limited { 
+            background: var(--card-dark); 
+            color: white; 
+            border: 2px solid var(--primary-blue);
+        }
+        .card-limited h3, 
+        .card-limited .price, 
+        .card-limited li,
+        .card-limited .desc { 
+            color: white; 
+        }
+        .card-limited .check { 
+            color: #60a5fa; 
+        }
         .card-plus { background: var(--white); }
 
-        .price-card h3 { font-size: 1.1rem; color: var(--text-light); margin-bottom: 10px; font-weight: 600; }
-        .price-card .price { font-size: 2.5rem; font-weight: 800; color: var(--text-main); margin-bottom: 5px; display: flex; align-items: baseline; gap: 5px; }
-        .price-card .price span { font-size: 1rem; color: var(--text-light); font-weight: 500; }
-        .price-card .desc { font-size: 0.9rem; color: var(--text-light); margin-bottom: 25px; display: block; }
+        .price-card h3 { 
+            font-size: 1.15rem; 
+            color: var(--text-light); 
+            margin-bottom: 12px; 
+            font-weight: 700; 
+            letter-spacing: -0.025em;
+        }
+        .card-limited h3 {
+            color: white;
+        }
+        .price-card .price { 
+            font-size: 2.5rem; 
+            font-weight: 800; 
+            color: var(--text-main); 
+            margin-bottom: 8px; 
+            display: flex; 
+            align-items: baseline; 
+            gap: 4px;
+            letter-spacing: -0.03em;
+        }
+        .card-limited .price {
+            color: white;
+        }
+        .price-card .price span { 
+            font-size: 1rem; 
+            color: var(--text-light); 
+            font-weight: 500; 
+        }
+        .card-limited .price span {
+            color: #94a3b8;
+        }
+        .price-card .desc { 
+            font-size: 0.95rem; 
+            color: var(--text-light); 
+            margin-bottom: 24px; 
+            display: block;
+            line-height: 1.5;
+        }
         
-        .feature-list { list-style: none; margin-bottom: 30px; }
-        .feature-list li { margin-bottom: 12px; font-size: 0.9rem; display: flex; align-items: center; gap: 10px; color: var(--text-main); }
-        .feature-list i { font-size: 0.8rem; }
+        .feature-list { 
+            list-style: none; 
+            margin-bottom: 30px; 
+            padding-left: 4px;
+        }
+        .feature-list li { 
+            margin-bottom: 14px; 
+            font-size: 0.95rem; 
+            display: flex; 
+            align-items: flex-start; 
+            gap: 10px; 
+            color: var(--text-main);
+            line-height: 1.5;
+        }
+        .card-limited .feature-list li {
+            color: #e2e8f0;
+        }
+        .feature-list i { 
+            font-size: 0.9rem; 
+            margin-top: 3px;
+            flex-shrink: 0;
+        }
         .check { color: var(--primary-blue); }
         
         .buy-btn {
             display: block;
             width: 100%;
-            padding: 12px;
+            padding: 14px;
             background: var(--primary-blue);
             color: white;
             text-align: center;
-            border-radius: 6px;
+            border-radius: 8px;
             text-decoration: none;
             font-weight: 600;
-            transition: 0.3s;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
         }
-        .buy-btn:hover { background: var(--primary-hover); }
-        .card-limited .buy-btn { background: var(--primary-blue); }
+        .buy-btn:hover { 
+            background: var(--primary-hover); 
+            transform: translateY(-1px);
+        }
+        .buy-btn:focus {
+            outline: 2px solid var(--primary-blue);
+            outline-offset: 2px;
+        }
+        .card-limited .buy-btn { 
+            background: var(--primary-blue); 
+        }
+        .card-free .buy-btn {
+            background: #475569;
+        }
+        .card-free .buy-btn:hover {
+            background: #334155;
+        }
 
         /* --- Footer --- */
-        footer { background: var(--dark-bg); color: white; padding: 60px 10% 30px; }
-        .footer-content { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 40px; margin-bottom: 40px; }
-        .footer-logo { font-size: 1.5rem; font-weight: 800; margin-bottom: 15px; display: block; }
+        footer { 
+            background: var(--dark-bg); 
+            color: white; 
+            padding: 60px 10% 30px; 
+        }
+        .footer-content { 
+            display: flex; 
+            justify-content: space-between; 
+            flex-wrap: wrap; 
+            gap: 40px; 
+            margin-bottom: 40px; 
+        }
+        .footer-brand {
+            max-width: 320px;
+        }
+        .footer-logo { 
+            font-size: 1.5rem; 
+            font-weight: 800; 
+            margin-bottom: 16px; 
+            display: block;
+            text-decoration: none;
+            color: white;
+        }
         .footer-logo span { color: var(--primary-blue); }
-        .footer-desc { color: #94a3b8; max-width: 300px; font-size: 0.9rem; }
+        .footer-desc { 
+            color: var(--text-muted); 
+            font-size: 0.95rem; 
+            line-height: 1.6;
+        }
         
-        .footer-links { display: flex; gap: 60px; }
-        .link-col h4 { color: white; margin-bottom: 20px; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
+        .footer-links { 
+            display: flex; 
+            gap: 50px; 
+            flex-wrap: wrap;
+        }
+        .link-col h4 { 
+            color: white; 
+            margin-bottom: 20px; 
+            font-size: 0.85rem; 
+            text-transform: uppercase; 
+            letter-spacing: 0.05em;
+            font-weight: 700;
+        }
         .link-col ul { list-style: none; }
-        .link-col li { margin-bottom: 10px; }
-        .link-col a { color: #94a3b8; text-decoration: none; font-size: 0.9rem; transition: 0.3s; }
-        .link-col a:hover { color: var(--primary-blue); }
+        .link-col li { margin-bottom: 12px; }
+        .link-col a { 
+            color: var(--text-muted); 
+            text-decoration: none; 
+            font-size: 0.95rem; 
+            transition: var(--transition);
+            display: inline-block;
+            padding: 2px 0;
+        }
+        .link-col a:hover { 
+            color: var(--primary-blue);
+            transform: translateX(2px);
+        }
+        .link-col a:focus {
+            outline: 2px solid var(--primary-blue);
+            outline-offset: 2px;
+            border-radius: 2px;
+        }
         
-        .copyright { text-align: center; border-top: 1px solid #1e293b; padding-top: 30px; color: #64748b; font-size: 0.85rem; }
+        .copyright { 
+            text-align: center; 
+            border-top: 1px solid #1e293b; 
+            padding-top: 30px; 
+            color: #64748b; 
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
 
-        /* Responsive */
+        /* --- Utility & Responsive --- */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
         @media (max-width: 900px) {
-            .hero { flex-direction: column; text-align: center; padding-top: 120px; }
-            .hero-content p { margin: 0 auto 30px; }
-            .hero-buttons { justify-content: center; }
-            .hero-image { justify-content: center; }
+            .hero { 
+                flex-direction: column; 
+                text-align: center; 
+                padding: 80px 5% 60px; 
+                min-height: auto;
+            }
+            .hero-content p { 
+                margin: 0 auto 30px; 
+            }
+            .hero-buttons { 
+                justify-content: center; 
+            }
+            .hero-image { 
+                justify-content: center; 
+                margin-top: 40px;
+            }
+            .hero-image img {
+                max-width: 450px;
+                transform: rotateY(-5deg) rotateX(2deg);
+            }
             .nav-links { display: none; }
             .mobile-menu { display: block; }
-            .pricing-grid { grid-template-columns: 1fr; max-width: 500px; margin: 0 auto; }
+            .pricing-grid { 
+                grid-template-columns: 1fr; 
+                max-width: 500px; 
+                margin: 0 auto; 
+            }
+            .footer-content {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            .footer-links {
+                justify-content: center;
+                gap: 30px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            .btn {
+                width: 100%;
+                max-width: 300px;
+                text-align: center;
+            }
+            .review-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Reduced motion preference */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
         }
     </style>
 </head>
 <body>
 
     <!-- Navigation -->
-    <nav>
-        <div class="logo"><i class="fas fa-meteor" style="color:var(--primary-blue)"></i> Comet <span>SS</span></div>
-        <div class="nav-links">
-            <a href="#">Home</a>
+    <nav id="navbar">
+        <a href="#" class="logo" aria-label="Comet SS Home">
+            <i class="fas fa-meteor" style="color:var(--primary-blue)" aria-hidden="true"></i> 
+            Comet <span>SS</span>
+        </a>
+        <div class="nav-links" role="navigation" aria-label="Main navigation">
+            <a href="#" class="active" aria-current="page">Home</a>
             <a href="#pricing">Pricing</a>
             <a href="#faq">FAQ</a>
-            <a href="https://discord.gg/ZNDwmDPzUy">Discord</a>
+            <a href="https://discord.gg/ZNDwmDPzUy" target="_blank" rel="noopener">Discord</a>
         </div>
-        <a href="#" class="login-btn">Login</a>
-        <div class="mobile-menu"><i class="fas fa-bars"></i></div>
+        <a href="#" class="login-btn" aria-label="Login to your account">Login</a>
+        <button class="mobile-menu" aria-label="Toggle menu" aria-expanded="false">
+            <i class="fas fa-bars" aria-hidden="true"></i>
+        </button>
     </nav>
 
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
             <h1>Ready to start <br><span>the fun?</span></h1>
-            <p>With Comet SS you will never go bored with all the high player count games and endless scripts for you to play. The best ServerSide on the market.</p>
+            <p>With Comet SS you'll never get bored. Access high-player-count games and endless scripts. The most reliable ServerSide on the market.</p>
             <div class="hero-buttons">
                 <a href="#pricing" class="btn btn-primary">Purchase Now</a>
                 <a href="trial.html" class="btn btn-secondary">Try Free Trial</a>
             </div>
         </div>
         <div class="hero-image">
-            <!-- Using a placeholder that looks like a code window, replace src with your actual UI image -->
-            <img src="https://cdn.discordapp.com/attachments/1445260395299471360/1476576857733464065/IMG_0916.png?ex=69a1a0dc&is=69a04f5c&hm=76da38fce0a4568f5c1956ea63fd9847beb81fc8cb8ae56bff0a0d0b63239845&" alt="Comet SS Interface">
+            <img src="https://cdn.discordapp.com/attachments/1445260395299471360/1476576857733464065/IMG_0916.png?ex=69a1a0dc&is=69a04f5c&hm=76da38fce0a4568f5c1956ea63fd9847beb81fc8cb8ae56bff0a0d0b63239845" 
+                 alt="Comet SS user interface showing script execution panel" 
+                 loading="lazy"
+                 width="600"
+                 height="400">
         </div>
     </section>
 
     <!-- Features Section -->
     <section class="features">
-        <h2>We are ahead of our competition.</h2>
-        <p>Here at Comet SS you can expect the best quality, service and overall experience.</p>
+        <h2>We're ahead of the competition</h2>
+        <p>At Comet SS, expect premium quality, reliable service, and an experience built for power users.</p>
         
         <div class="features-grid">
             <div class="feature-card">
-                <i class="fas fa-bolt icon-fast"></i>
+                <i class="fas fa-bolt icon-fast" aria-hidden="true"></i>
                 <h3>Blazing Fast</h3>
-                <p>When you execute your script, your script is handled through our secure and blazing fast servers!</p>
+                <p>Scripts execute through our optimized, low-latency servers for instant results—no lag, no delays.</p>
             </div>
             <div class="feature-card">
-                <i class="fas fa-shield-alt icon-secure"></i>
-                <h3>Secure</h3>
-                <p>Since our servers are secure, you will never experience unexpected downtime or bans. Undetected & Safe.</p>
+                <i class="fas fa-shield-alt icon-secure" aria-hidden="true"></i>
+                <h3>Secure & Undetected</h3>
+                <p>Advanced protection keeps your account safe. Regular updates ensure compatibility and stealth.</p>
             </div>
             <div class="feature-card">
-                <i class="fas fa-sliders-h icon-custom"></i>
-                <h3>Customizable</h3>
-                <p>Our UI is known not only for its smoothness, but it's also known for its customizable interface.</p>
+                <i class="fas fa-sliders-h icon-custom" aria-hidden="true"></i>
+                <h3>Fully Customizable</h3>
+                <p>Personalize the UI to match your workflow. Clean, intuitive, and built for efficiency.</p>
             </div>
         </div>
     </section>
 
     <!-- Reviews Section -->
     <section id="reviews" class="reviews">
-    <h2 class="section-title">Community Feedback</h2>
-    <div class="review-grid">
-        <div class="review-card">
-            <span class="review-user">Jerek</span>
-            <p class="review-text">"I was hard after i bought this. 10/10"</p>
-            <span class="review-rating">10/10</span>
+        <h2>Community Feedback</h2>
+        <div class="review-grid">
+            <div class="review-card">
+                <p class="review-text">"I was hard after I bought this. 10/10"</p>
+                <span class="review-user">— Jerek</span>
+                <span class="review-rating">10/10</span>
+            </div>
+            <div class="review-card">
+                <p class="review-text">"Girls came to me after I bought this. 20/10"</p>
+                <span class="review-user">— reptiletorn</span>
+                <span class="review-rating">20/10</span>
+            </div>
+            <div class="review-card">
+                <p class="review-text">"I became way better after I got this SS. 100/10"</p>
+                <span class="review-user">— j00lkidd</span>
+                <span class="review-rating">100/10</span>
+            </div>
+            <div class="review-card">
+                <p class="review-text">"Best script hub I've ever used"</p>
+                <span class="review-user">— Johnny</span>
+                <span class="review-rating">9/10</span>
+            </div>
+            <div class="review-card">
+                <p class="review-text">"Cheap as shit, best TOS"</p>
+                <span class="review-user">— iPingEveryone</span>
+                <span class="review-rating">9.5/10</span>
+            </div>
+            <div class="review-card">
+                <p class="review-text">"This serverside is better than anything else in Roblox executors"</p>
+                <span class="review-user">— ✧ bluududk4ng ✧</span>
+                <span class="review-rating">∞/10</span>
+            </div>
         </div>
-        <div class="review-card">
-            <span class="review-user">reptiletorn</span>
-            <p class="review-text">"girls came to me after i bought this 20/10"</p>
-            <span class="review-rating">20/10</span>
-        </div>
-        <div class="review-card">
-            <span class="review-user">j00lkidd</span>
-            <p class="review-text">"i became better after igot this ss 100/10"</p>
-            <span class="review-rating">100/10</span>
-        </div>
-        <div class="review-card">
-            <span class="review-user">Johnny</span>
-            <p class="review-text">"best scrip hub I've ever seen"</p>
-            <span class="review-rating">9/10</span>
-        </div>
-        <div class="review-card">
-            <span class="review-user">iPingEveryone</span>
-            <p class="review-text">"cheap as shit, best TOS"</p>
-            <span class="review-rating">9.5/10</span>
-        </div>
-        <div class="review-card">
-            <span class="review-user">✧ bluududk4ng ✧</span>
-            <p class="review-text">"this serverside is the best than all things exist in roblox executors"</p>
-            <span class="review-rating">inf/10</span>
-        </div>
-    </div>
-</section>
+    </section>
 
     <!-- Pricing Section -->
     <section id="pricing" class="pricing">
         <div class="pricing-header">
-            <h2>Our Pricing</h2>
-            <p>Seen enough of Comet SS? Come on and purchase your self a Comet SS Whitelist!</p>
+            <h2>Simple, Transparent Pricing</h2>
+            <p>Choose the plan that fits your needs. All plans include core features and community access.</p>
         </div>
 
         <div class="pricing-grid">
@@ -286,53 +762,53 @@
             <div class="price-card card-free">
                 <h3>Trial</h3>
                 <div class="price">Free</div>
-                <span class="desc">24 Hour Trial to try out Comet SS.</span>
+                <span class="desc">24-hour access to test Comet SS</span>
                 <ul class="feature-list">
-                    <li><i class="fas fa-check-circle check"></i> Access to Trial Games</li>
-                    <li><i class="fas fa-check-circle check"></i> 24 Hour Trial</li>
+                    <li><i class="fas fa-check-circle check" aria-hidden="true"></i> Access to trial games</li>
+                    <li><i class="fas fa-check-circle check" aria-hidden="true"></i> 24-hour limited access</li>
                 </ul>
-                <a href="trial.html" class="buy-btn" style="background:#334155">Try out</a>
+                <a href="trial.html" class="buy-btn" style="background:#475569">Start Free Trial</a>
             </div>
 
             <!-- Normal / Standard -->
             <div class="price-card card-normal">
-                <h3>Normal</h3>
+                <h3>Standard</h3>
                 <div class="price">400 <span>Robux</span></div>
-                <span class="desc">Normal Comet SS Whitelist</span>
+                <span class="desc">Full access to Comet SS features</span>
                 <ul class="feature-list">
-                    <li><i class="fas fa-check-circle check"></i> Access to all our games</li>
-                    <li><i class="fas fa-check-circle check"></i> Large library of Scripts</li>
-                    <li><i class="fas fa-check-circle check"></i> Large Community</li>
-                    <li><i class="fas fa-check-circle check"></i> 24/7 Support</li>
+                    <li><i class="fas fa-check-circle check" aria-hidden="true"></i> All supported games</li>
+                    <li><i class="fas fa-check-circle check" aria-hidden="true"></i> Extensive script library</li>
+                    <li><i class="fas fa-check-circle check" aria-hidden="true"></i> Active community</li>
+                    <li><i class="fas fa-check-circle check" aria-hidden="true"></i> 24/7 support</li>
                 </ul>
-                <a href="https://www.roblox.com/game-pass/1724645841" class="buy-btn">Purchase</a>
+                <a href="https://www.roblox.com/game-pass/1724645841" class="buy-btn" target="_blank" rel="noopener">Purchase on Roblox</a>
             </div>
 
             <!-- Limited / Popular -->
-            <div class="price-card card-limited">
-                <h3>Limited TOS | Popular</h3>
+            <div class="price-card card-limited popular">
+                <h3>Limited TOS</h3>
                 <div class="price">$10.99 <span>USD</span></div>
-                <span class="desc" style="color:#94a3b8">Limited TOS Comet SS Whitelist</span>
+                <span class="desc">Enhanced features with flexible terms</span>
                 <ul class="feature-list">
-                    <li><i class="fas fa-check-circle check"></i> Everything Normal has</li>
-                    <li><i class="fas fa-check-circle check"></i> Limited Terms Of Service | More Possibilities</li>
-                    <li><i class="fas fa-check-circle check"></i> Priority Support</li>
+                    <li><i class="fas fa-check-circle check" aria-hidden="true"></i> Everything in Standard</li>
+                    <li><i class="fas fa-check-circle check" aria-hidden="true"></i> Relaxed Terms of Service</li>
+                    <li><i class="fas fa-check-circle check" aria-hidden="true"></i> Priority support queue</li>
                 </ul>
-                <a href="https://www.roblox.com/game-pass/1727256672" class="buy-btn">Purchase</a>
+                <a href="https://www.roblox.com/game-pass/1727256672" class="buy-btn" target="_blank" rel="noopener">Get Limited TOS</a>
             </div>
 
             <!-- Comet+ -->
             <div class="price-card card-plus">
                 <h3>Comet+</h3>
                 <div class="price">$17.99 <span>USD</span></div>
-                <span class="desc">Comet+ Whitelist</span>
+                <span class="desc">Maximum freedom for power users</span>
                 <ul class="feature-list">
-                    <li><i class="fas fa-check-circle check"></i> Everything Normal has</li>
-                    <li><i class="fas fa-check-circle check"></i> Ability to abuse in our games</li>
-                    <li><i class="fas fa-check-circle check"></i> No TOS</li>
-                    <li><i class="fas fa-check-circle check"></i> Premium Games</li>
+                    <li><i class="fas fa-check-circle check" aria-hidden="true"></i> All Standard features</li>
+                    <li><i class="fas fa-check-circle check" aria-hidden="true"></i> Advanced game interactions</li>
+                    <li><i class="fas fa-check-circle check" aria-hidden="true"></i> No usage restrictions</li>
+                    <li><i class="fas fa-check-circle check" aria-hidden="true"></i> Exclusive premium games</li>
                 </ul>
-                <a href="https://www.roblox.com/game-pass/1728612396" class="buy-btn">Purchase</a>
+                <a href="https://www.roblox.com/game-pass/1728612396" class="buy-btn" target="_blank" rel="noopener">Upgrade to Comet+</a>
             </div>
         </div>
     </section>
@@ -340,13 +816,13 @@
     <!-- Footer -->
     <footer>
         <div class="footer-content">
-            <div>
-                <span class="footer-logo">Comet <span>SS</span></span>
-                <p class="footer-desc">The premium ServerSide executor for Roblox. Safe, fast, and reliable.</p>
+            <div class="footer-brand">
+                <a href="#" class="footer-logo">Comet <span>SS</span></a>
+                <p class="footer-desc">The premium ServerSide solution for Roblox. Built for performance, designed for you.</p>
             </div>
             <div class="footer-links">
                 <div class="link-col">
-                    <h4>Pages</h4>
+                    <h4>Navigation</h4>
                     <ul>
                         <li><a href="#">Home</a></li>
                         <li><a href="#pricing">Pricing</a></li>
@@ -354,45 +830,95 @@
                     </ul>
                 </div>
                 <div class="link-col">
-                    <h4>Join Us</h4>
+                    <h4>Community</h4>
                     <ul>
-                        <li><a href="https://discord.gg/ZNDwmDPzUy">Discord</a></li>
+                        <li><a href="https://discord.gg/ZNDwmDPzUy" target="_blank" rel="noopener">Discord</a></li>
                     </ul>
                 </div>
                 <div class="link-col">
                     <h4>Legal</h4>
                     <ul>
                         <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Terms & Conditions</a></li>
+                        <li><a href="#">Terms of Service</a></li>
                     </ul>
                 </div>
             </div>
         </div>
         <div class="copyright">
-            &copy; 2026 Comet SS™ All Rights Reserved.
+            &copy; 2026 Comet SS™. All rights reserved. Not affiliated with Roblox Corporation.
         </div>
     </footer>
 
     <script>
-        // Simple Mobile Menu Toggle
+        // Mobile menu toggle with accessibility
         const menuBtn = document.querySelector('.mobile-menu');
         const navLinks = document.querySelector('.nav-links');
+        const navbar = document.getElementById('navbar');
         
         menuBtn.addEventListener('click', () => {
+            const isExpanded = menuBtn.getAttribute('aria-expanded') === 'true';
+            menuBtn.setAttribute('aria-expanded', !isExpanded);
+            
             if (navLinks.style.display === 'flex') {
                 navLinks.style.display = 'none';
             } else {
                 navLinks.style.display = 'flex';
                 navLinks.style.flexDirection = 'column';
                 navLinks.style.position = 'absolute';
-                navLinks.style.top = '60px';
+                navLinks.style.top = '100%';
                 navLinks.style.left = '0';
                 navLinks.style.right = '0';
                 navLinks.style.background = 'white';
                 navLinks.style.padding = '20px';
-                navLinks.style.boxShadow = '0 10px 20px rgba(0,0,0,0.1)';
+                navLinks.style.boxShadow = '0 10px 25px rgba(0,0,0,0.1)';
+                navLinks.style.zIndex = '999';
             }
         });
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth <= 900) {
+                    navLinks.style.display = 'none';
+                    menuBtn.setAttribute('aria-expanded', 'false');
+                }
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 10) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scroll for anchor links (enhanced)
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href === '#') return;
+                
+                e.preventDefault();
+                const target = document.querySelector(href);
+                if (target) {
+                    const headerOffset = 80;
+                    const elementPosition = target.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                    
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Initialize navbar state
+        if (window.scrollY > 10) {
+            navbar.classList.add('scrolled');
+        }
     </script>
 </body>
 </html>
